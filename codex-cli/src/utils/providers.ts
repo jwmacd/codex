@@ -22,10 +22,10 @@ export const providers: Record<
     baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
     envKey: "GEMINI_API_KEY",
   },
-  ollama: {
-    name: "Ollama",
-    baseURL: "http://localhost:11434/v1",
-    envKey: "OLLAMA_API_KEY",
+  local_model: {
+    name: "Local Model",
+    baseURL: "http://192.168.1.35:8001/v1",
+    envKey: "LOCAL_MODEL_API_KEY",
   },
   mistral: {
     name: "Mistral",
