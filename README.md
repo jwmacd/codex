@@ -75,6 +75,12 @@ Install globally:
 
 ```shell
 npm install -g @openai/codex
+# or
+yarn global add @openai/codex
+# or
+bun install -g @openai/codex
+# or
+pnpm add -g @openai/codex
 ```
 
 Next, set your OpenAI API key as an environment variable:
@@ -100,7 +106,7 @@ export OPENAI_API_KEY="your-api-key-here"
 > - openrouter
 > - azure
 > - gemini
-> - ollama
+> - Local Model
 > - mistral
 > - deepseek
 > - xai
@@ -411,10 +417,10 @@ Below is a comprehensive example of `config.json` with multiple custom providers
       "baseURL": "https://generativelanguage.googleapis.com/v1beta/openai",
       "envKey": "GEMINI_API_KEY"
     },
-    "ollama": {
-      "name": "Ollama",
-      "baseURL": "http://localhost:11434/v1",
-      "envKey": "OLLAMA_API_KEY"
+    "Local Model": {
+      "name": "Local Model",
+      "baseURL": "http://192.168.1.35:8001/v1",
+      "envKey": "LOCAL_MODEL_API_KEY"
     },
     "mistral": {
       "name": "Mistral",

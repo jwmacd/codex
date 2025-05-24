@@ -2,7 +2,7 @@
 
 You can install any of these versions: `npm install -g codex@version`
 
-## `0.1.2505172129`
+## `0.1.2505172129-local`
 
 ### 🪲 Bug Fixes
 

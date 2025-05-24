@@ -50,8 +50,8 @@ because the following definition for `ollama` is included in Codex:
 
 ```toml
 [model_providers.ollama]
-name = "Ollama"
-base_url = "http://localhost:11434/v1"
+name = "Local Model"
+base_url = "http://192.168.1.35:8001/v1"
 wire_api = "chat"
 ```
 
