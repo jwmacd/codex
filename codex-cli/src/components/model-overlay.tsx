@@ -38,7 +38,7 @@ export default function ModelOverlay({
   );
   const [providerItems, _setProviderItems] = useState<
     Array<{ label: string; value: string }>
-  >(Object.entries(providers).map(([key, p]) => ({ label: p.name, value: key })));
+  >(Object.values(providers).map((p) => ({ label: p.name, value: p.name })));
   const [mode, setMode] = useState<"model" | "provider">("model");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -117,7 +117,7 @@ export default function ModelOverlay({
           <Box flexDirection="column">
             <Text>
               Current provider:{" "}
-              <Text color="greenBright">{providers[currentProvider]?.name || currentProvider}</Text>
+              <Text color="greenBright">{currentProvider}</Text>
             </Text>
             <Text dimColor>press tab to switch to model selection</Text>
           </Box>
@@ -125,7 +125,6 @@ export default function ModelOverlay({
         initialItems={providerItems}
         currentValue={currentProvider}
         onSelect={(provider) => {
-          console.log(`ModelOverlay: provider selected="${provider}"`);
           if (onSelectProvider) {
             onSelectProvider(provider);
             // Immediately switch to model selection so user can pick a model for the new provider
@@ -146,7 +145,7 @@ export default function ModelOverlay({
             Current model: <Text color="greenBright">{currentModel}</Text>
           </Text>
           <Text>
-            Current provider: <Text color="greenBright">{providers[currentProvider]?.name || currentProvider}</Text>
+            Current provider: <Text color="greenBright">{currentProvider}</Text>
           </Text>
           {isLoading && <Text color="yellow">Loading models...</Text>}
           <Text dimColor>press tab to switch to provider selection</Text>

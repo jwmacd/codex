@@ -22,7 +22,7 @@ import {
 } from "../config.js";
 import { log } from "../logger/log.js";
 import { parseToolCallArguments } from "../parsers.js";
-import { responsesCreateViaChatCompletions, ResponseOutput } from "../responses.js";
+import { responsesCreateViaChatCompletions } from "../responses.js";
 import {
   ORIGIN,
   getSessionId,
@@ -776,10 +776,6 @@ export class AgentLoop {
         }
         // Send request to OpenAI with retry on timeout.
         let stream;
-        // Track whether the current request uses streaming or not so we can
-        // handle the response appropriately afterwards. Some local model
-        // servers do not support streaming when tools are enabled.
-        let didStream = true;
 
         // Retry loop for transient errors. Up to MAX_RETRIES attempts.
         const MAX_RETRIES = 8;
@@ -815,7 +811,7 @@ export class AgentLoop {
             log(
               `instructions (length ${mergedInstructions.length}): ${mergedInstructions}`,
             );
-            
+
             // eslint-disable-next-line no-await-in-loop
             stream = await responseCall({
               model: this.model,
@@ -1018,55 +1014,6 @@ export class AgentLoop {
           }
           this.onLoading(false);
           return;
-        }
-
-        // For local models without streaming support the request returns a
-        // fully-formed response object. Process it just like the streaming
-        // completion handler would and compute the next turn input before
-        // continuing the outer loop.
-        if (!didStream) {
-          const response = stream as ResponseOutput;
-          let newTurnInput: Array<ResponseInputItem> = [];
-
-          if (thisGeneration === this.generation && !this.canceled) {
-            for (const item of response.output) {
-              stageItem(item as ResponseItem);
-            }
-          }
-
-          if (
-            response.status === "completed" ||
-            (response.status as unknown as string) === "requires_action"
-          ) {
-            newTurnInput = await this.processEventsWithoutStreaming(
-              response.output,
-              stageItem,
-            );
-
-            if (this.disableResponseStorage) {
-              const cleaned = filterToApiMessages(
-                response.output.map(stripInternalFields),
-              );
-              this.transcript.push(...cleaned);
-
-              const delta = filterToApiMessages(
-                newTurnInput.map(stripInternalFields),
-              );
-
-              if (delta.length === 0) {
-                newTurnInput = [];
-              } else {
-                newTurnInput = [...this.transcript, ...delta];
-                transcriptPrefixLen = this.transcript.length;
-              }
-            }
-          }
-
-          lastResponseId = response.id;
-          this.onLastResponseId(response.id);
-
-          turnInput = newTurnInput;
-          continue;
         }
 
         // Keep track of the active stream so it can be aborted on demand.
