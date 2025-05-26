@@ -815,21 +815,13 @@ export class AgentLoop {
             log(
               `instructions (length ${mergedInstructions.length}): ${mergedInstructions}`,
             );
-
-            // Disable streaming for local_model provider when tools are enabled.
-            // Many local model servers don't support streaming with tools.
-            const shouldStream = !(
-              this.provider?.toLowerCase() === "local_model" &&
-              tools.length > 0
-            );
-            didStream = shouldStream;
             
             // eslint-disable-next-line no-await-in-loop
             stream = await responseCall({
               model: this.model,
               instructions: mergedInstructions,
               input: turnInput,
-              stream: shouldStream,
+              stream: true,
               parallel_tool_calls: false,
               reasoning,
               ...(this.config.flexMode ? { service_tier: "flex" } : {}),
