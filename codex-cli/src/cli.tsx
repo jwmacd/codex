@@ -363,7 +363,7 @@ if (cli.flags.free) {
 }
 
 // Set of providers that don't require API keys
-const NO_API_KEY_REQUIRED = new Set(["ollama"]);
+const NO_API_KEY_REQUIRED = new Set(["local_model"]);
 
 // Skip API key validation for providers that don't require an API key
 if (!apiKey && !NO_API_KEY_REQUIRED.has(provider.toLowerCase())) {

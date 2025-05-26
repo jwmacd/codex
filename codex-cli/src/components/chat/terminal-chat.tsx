@@ -667,6 +667,7 @@ export default function TerminalChat({
               log(
                 "TerminalChat: interruptAgent invoked – calling agent.cancel()",
               );
+              log(`TerminalChat: onSelectProvider called with newProvider="${newProvider}"`);
               if (!agent) {
                 log("TerminalChat: agent is not ready yet");
               }
@@ -682,6 +683,7 @@ export default function TerminalChat({
                 provider: newProvider,
                 model: defaultModel,
               };
+              log(`TerminalChat: saving config with provider="${newProvider}"`);
               saveConfig(updatedConfig);
 
               setProvider(newProvider);
@@ -699,7 +701,7 @@ export default function TerminalChat({
                   content: [
                     {
                       type: "input_text",
-                      text: `Switched provider to ${newProvider} with model ${defaultModel}`,
+                      text: `Switched provider to ${config.providers?.[newProvider]?.name || newProvider} with model ${defaultModel}`,
                     },
                   ],
                 },
