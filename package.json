@@ -45,7 +45,7 @@
     "**/*.{js,ts,tsx}": [
       "prettier --write",
       "pnpm --filter @openai/codex run lint",
-      "cd codex-cli && pnpm run typecheck"
+      "pnpm -w run -C codex-cli typecheck"
     ]
   },
   "packageManager": "pnpm@10.8.1"
