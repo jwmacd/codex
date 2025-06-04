@@ -199,4 +199,8 @@ export const openAiModelInfo = {
     label: "GPT-4 (1106) Preview",
     maxContextLength: 128000,
   },
+  "local-model": {
+    label: "Local Model",
+    maxContextLength: 128000,
+  },
 } as const satisfies Record<string, ModelInfo>;

@@ -10,7 +10,6 @@ Today, the easiest way to install Codex is via `npm`, though we plan to publish 
 npm i -g @openai/codex@native
 codex
 ```
-
 You can also download a platform-specific release directly from our [GitHub Releases](https://github.com/openai/codex/releases).
 
 ## Config

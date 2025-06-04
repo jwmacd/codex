@@ -109,7 +109,7 @@ pub fn built_in_model_providers() -> HashMap<String, ModelProviderInfo> {
         (
             "ollama",
             P {
-                name: "Ollama".into(),
+                name: "Local Model".into(),
                 base_url: "http://localhost:11434/v1".into(),
                 env_key: None,
                 env_key_instructions: None,
