@@ -110,7 +110,7 @@ pub fn built_in_model_providers() -> HashMap<String, ModelProviderInfo> {
             "ollama",
             P {
                 name: "Local Model".into(),
-                base_url: "http://192.168.1.35:8001/v1".into(),
+                base_url: "http://localhost:11434/v1".into(),
                 env_key: None,
                 env_key_instructions: None,
                 wire_api: WireApi::Chat,

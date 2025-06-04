@@ -419,7 +419,7 @@ Below is a comprehensive example of `config.json` with multiple custom providers
     },
     "Local Model": {
       "name": "Local Model",
-      "baseURL": "http://192.168.1.35:8001/v1",
+      "baseURL": "http://localhost:11434/v1",
       "envKey": "LOCAL_MODEL_API_KEY"
     },
     "mistral": {

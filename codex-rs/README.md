@@ -51,7 +51,7 @@ because the following definition for `ollama` is included in Codex:
 ```toml
 [model_providers.ollama]
 name = "Local Model"
-base_url = "http://192.168.1.35:8001/v1"
+base_url = "http://localhost:11434/v1"
 wire_api = "chat"
 ```
 

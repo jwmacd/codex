@@ -24,7 +24,7 @@ export const providers: Record<
   },
   local_model: {
     name: "Local Model",
-    baseURL: "http://192.168.1.35:8001/v1",
+    baseURL: "http://localhost:11434/v1",
     envKey: "LOCAL_MODEL_API_KEY",
   },
   mistral: {
